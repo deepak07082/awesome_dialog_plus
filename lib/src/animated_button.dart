@@ -6,7 +6,7 @@ class AnimatedButton extends StatefulWidget {
   ///Constructor
   const AnimatedButton({
     required this.pressEvent,
-    Key? key,
+    super.key,
     this.text,
     this.icon,
     this.color,
@@ -15,7 +15,7 @@ class AnimatedButton extends StatefulWidget {
     this.width = double.infinity,
     this.borderRadius,
     this.buttonTextStyle,
-  }) : super(key: key);
+  });
 
   /// Function to execute when button is pressed
   final void Function() pressEvent;
@@ -63,13 +63,8 @@ class _AnimatedButtonState extends State<AnimatedButton>
       vsync: this,
       duration: const Duration(milliseconds: _forwardDurationNumber),
       reverseDuration: const Duration(milliseconds: 100),
-    )..addStatusListener(
-        _animationStatusListener,
-      );
-    _scale = Tween<double>(
-      begin: 1,
-      end: 0.9,
-    ).animate(
+    )..addStatusListener(_animationStatusListener);
+    _scale = Tween<double>(begin: 1, end: 0.9).animate(
       CurvedAnimation(
         parent: _animationController,
         curve: Curves.easeIn,
@@ -100,59 +95,51 @@ class _AnimatedButtonState extends State<AnimatedButton>
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: _scale,
-      child: _animatedButtonUI,
-    );
+    return ScaleTransition(scale: _scale, child: _animatedButtonUI);
   }
 
   Widget get _animatedButtonUI => SizedBox(
-        width: widget.width,
-        height: widget.isFixedHeight ? 50 : widget.height,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            elevation: 0,
-            backgroundColor: widget.color,
-            shape: RoundedRectangleBorder(
-              borderRadius: widget.borderRadius ??
-                  const BorderRadius.all(
-                    Radius.circular(100),
-                  ),
+    width: widget.width,
+    height: widget.isFixedHeight ? 50 : widget.height,
+    child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        backgroundColor: widget.color,
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              widget.borderRadius ??
+              const BorderRadius.all(Radius.circular(100)),
+        ),
+      ),
+      onPressed: _onTap,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          if (widget.icon != null) ...<Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 4),
+              child: Icon(widget.icon, color: Colors.white),
+            ),
+            const SizedBox(width: 5),
+          ],
+          Flexible(
+            child: FittedBox(
+              child: Text(
+                '${widget.text}',
+                // maxLines: 1,
+                textAlign: TextAlign.center,
+                style:
+                    widget.buttonTextStyle ??
+                    const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                    ),
+              ),
             ),
           ),
-          onPressed: _onTap,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              if (widget.icon != null) ...<Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 4),
-                  child: Icon(
-                    widget.icon,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-              ],
-              Flexible(
-                child: FittedBox(
-                  child: Text(
-                    '${widget.text}',
-                    // maxLines: 1,
-                    textAlign: TextAlign.center,
-                    style: widget.buttonTextStyle ??
-                        const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 14,
-                        ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
+        ],
+      ),
+    ),
+  );
 }

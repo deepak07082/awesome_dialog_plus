@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:awesome_dialog_plus/src/animated_button.dart';
 import 'package:awesome_dialog_plus/src/anims/native_animations.dart';
 import 'package:awesome_dialog_plus/src/header.dart';
@@ -76,6 +78,7 @@ class AwesomeDialog {
 
   /// The [TextStyle] of the title
   ///
+  // ignore: comment_references
   /// If not set, it will be the [ThemeData.textTheme.headline6]
   final TextStyle? titleTextStyle;
 
@@ -280,8 +283,8 @@ class AwesomeDialog {
   }
 
   /// Returns the body of the dialog
-  Widget get _buildDialog => WillPopScope(
-    onWillPop: _onWillPop,
+  Widget get _buildDialog => PopScope(
+    onPopInvokedWithResult: _onWillPop,
     child: _getDialogWidget(
       child: VerticalStackDialog(
         dialogBackgroundColor: dialogBackgroundColor,
@@ -317,12 +320,16 @@ class AwesomeDialog {
 
   Widget _getDialogWidget({required Widget child}) {
     return enableEnterKey
-        ? RawKeyboardListener(
+        ? KeyboardListener(
             focusNode: FocusNode(),
             autofocus: true,
-            onKey: (RawKeyEvent event) {
-              if (event.isKeyPressed(LogicalKeyboardKey.enter) ||
-                  event.isKeyPressed(LogicalKeyboardKey.numpadEnter)) {
+            onKeyEvent: (KeyEvent event) {
+              if (HardwareKeyboard.instance.isLogicalKeyPressed(
+                    LogicalKeyboardKey.enter,
+                  ) ||
+                  HardwareKeyboard.instance.isLogicalKeyPressed(
+                    LogicalKeyboardKey.numpadEnter,
+                  )) {
                 if (btnOk == null && btnOkOnPress != null) {
                   _dismissType = DismissType.btnOk;
                   dismiss();
@@ -413,7 +420,10 @@ class AwesomeDialog {
   }
 
   /// Executes when `back button` pressed or `barrier dismissed`
-  Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop(bool didPop, result) async {
+    if (didPop) {
+      return false;
+    }
     //Determine whenever the dismiss is from Modal Barrier or BackButton
     if (StackTrace.current.toString().contains('ModalBarrier')) {
       if (dismissOnTouchOutside) {

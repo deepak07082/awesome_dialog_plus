@@ -6,8 +6,8 @@ class RiveAssetAnimation extends StatefulWidget {
   const RiveAssetAnimation({
     required this.assetPath,
     required this.animName,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   ///Path of the .riv assets file
   final String assetPath;
@@ -26,8 +26,6 @@ class _RiveAnimationState extends State<RiveAssetAnimation> {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      widget.assetPath,
-    );
+    return Image.asset(widget.assetPath);
   }
 }

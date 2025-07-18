@@ -4,13 +4,7 @@
 import 'package:flutter/material.dart';
 
 ///Defines animation transition
-enum AnimType {
-  scale,
-  leftSlide,
-  rightSlide,
-  bottomSlide,
-  topSlide,
-}
+enum AnimType { scale, leftSlide, rightSlide, bottomSlide, topSlide }
 
 ///
 /// Exp: AnimationTransition.fromRight(animation, secondaryAnimation, child);
@@ -27,12 +21,7 @@ class AnimationTransition {
         position: Tween<Offset>(
           begin: const Offset(0.2, 0),
           end: Offset.zero,
-        ).animate(
-          CurvedAnimation(
-            parent: animation,
-            curve: Curves.ease,
-          ),
-        ),
+        ).animate(CurvedAnimation(parent: animation, curve: Curves.ease)),
         child: child,
       ),
     );
@@ -50,12 +39,7 @@ class AnimationTransition {
         position: Tween<Offset>(
           begin: const Offset(-0.2, 0),
           end: Offset.zero,
-        ).animate(
-          CurvedAnimation(
-            parent: animation,
-            curve: Curves.ease,
-          ),
-        ),
+        ).animate(CurvedAnimation(parent: animation, curve: Curves.ease)),
         child: child,
       ),
     );
@@ -73,12 +57,7 @@ class AnimationTransition {
         position: Tween<Offset>(
           begin: const Offset(0, -0.2),
           end: Offset.zero,
-        ).animate(
-          CurvedAnimation(
-            parent: animation,
-            curve: Curves.ease,
-          ),
-        ),
+        ).animate(CurvedAnimation(parent: animation, curve: Curves.ease)),
         child: child,
       ),
     );
@@ -96,12 +75,7 @@ class AnimationTransition {
         position: Tween<Offset>(
           begin: const Offset(0, 0.2),
           end: Offset.zero,
-        ).animate(
-          CurvedAnimation(
-            parent: animation,
-            curve: Curves.ease,
-          ),
-        ),
+        ).animate(CurvedAnimation(parent: animation, curve: Curves.ease)),
         child: child,
       ),
     );
@@ -119,9 +93,7 @@ class AnimationTransition {
         scale: Tween<double>(
           begin: 0.7,
           end: 1,
-        ).animate(
-          CurvedAnimation(parent: animation, curve: Curves.ease),
-        ),
+        ).animate(CurvedAnimation(parent: animation, curve: Curves.ease)),
         child: child,
       ),
     );
@@ -136,17 +108,8 @@ class AnimationTransition {
     return FadeTransition(
       opacity: animation,
       child: ScaleTransition(
-        scale: Tween<double>(
-          begin: 1.2,
-          end: 1,
-        ).animate(
-          CurvedAnimation(
-            parent: animation,
-            curve: const Interval(
-              0.50,
-              1,
-            ),
-          ),
+        scale: Tween<double>(begin: 1.2, end: 1).animate(
+          CurvedAnimation(parent: animation, curve: const Interval(0.50, 1)),
         ),
         child: child,
       ),

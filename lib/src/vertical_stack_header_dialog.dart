@@ -8,7 +8,7 @@ class VerticalStackDialog extends StatelessWidget {
     required this.header,
     required this.padding,
     required this.onClose,
-    Key? key,
+    super.key,
     this.title,
     this.titleStyle,
     this.desc,
@@ -28,7 +28,7 @@ class VerticalStackDialog extends StatelessWidget {
     this.borderRadius,
     this.bodyHeaderDistance = 15.0,
     this.reverseBtnOrder = false,
-  }) : super(key: key);
+  });
   final String? title;
   final TextStyle? titleStyle;
   final String? desc;
@@ -80,10 +80,8 @@ class VerticalStackDialog extends StatelessWidget {
                   ),
             child: Material(
               shape: RoundedRectangleBorder(
-                borderRadius: borderRadius ??
-                    const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
+                borderRadius:
+                    borderRadius ?? const BorderRadius.all(Radius.circular(10)),
                 side: borderSide ?? BorderSide.none,
               ),
               elevation: 0.5,
@@ -115,10 +113,7 @@ class VerticalStackDialog extends StatelessWidget {
                                 ),
                             ],
                           ),
-                      if (desc != null)
-                        const SizedBox(
-                          height: 16,
-                        ),
+                      if (desc != null) const SizedBox(height: 16),
                       if (btnOk != null || btnCancel != null)
                         Container(
                           padding: const EdgeInsets.symmetric(
@@ -129,31 +124,17 @@ class VerticalStackDialog extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               if (reverseBtnOrder) ...[
-                                if (btnOk != null)
-                                  Expanded(
-                                    child: btnOk!,
-                                  ),
+                                if (btnOk != null) Expanded(child: btnOk!),
                                 if (btnCancel != null && btnOk != null)
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
+                                  const SizedBox(width: 10),
                                 if (btnCancel != null)
-                                  Expanded(
-                                    child: btnCancel ?? Container(),
-                                  ),
+                                  Expanded(child: btnCancel ?? Container()),
                               ] else ...[
                                 if (btnCancel != null)
-                                  Expanded(
-                                    child: btnCancel ?? Container(),
-                                  ),
+                                  Expanded(child: btnCancel ?? Container()),
                                 if (btnCancel != null && btnOk != null)
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                if (btnOk != null)
-                                  Expanded(
-                                    child: btnOk!,
-                                  ),
+                                  const SizedBox(width: 10),
+                                if (btnOk != null) Expanded(child: btnOk!),
                               ],
                             ],
                           ),
@@ -171,9 +152,7 @@ class VerticalStackDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Material(
-                    shape: CircleBorder(
-                      side: borderSide ?? BorderSide.none,
-                    ),
+                    shape: CircleBorder(side: borderSide ?? BorderSide.none),
                     child: CircleAvatar(
                       backgroundColor: dialogBackgroundColor ?? theme.cardColor,
                       radius: 55,
@@ -199,13 +178,11 @@ class VerticalStackDialog extends StatelessWidget {
 
   /// The default widget for the Title of dialog
   List<Widget> _titleBody(String title, ThemeData theme) => <Widget>[
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: titleStyle ?? theme.textTheme.titleLarge,
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-      ];
+    Text(
+      title,
+      textAlign: TextAlign.center,
+      style: titleStyle ?? theme.textTheme.titleLarge,
+    ),
+    const SizedBox(height: 10),
+  ];
 }
