@@ -1,4 +1,4 @@
-name: awesome_dialog
+name: awesome_dialog_plus
 description: Flutter package to show beautiful dialogs(INFO,QUESTION,WARNING,SUCCESS,ERROR) with animations as simply as possible.
 version: 3.2.2
 homepage: https://github.com/deepak07082/awesome_dialog_plus
