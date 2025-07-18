@@ -1,7 +1,7 @@
-import 'package:awesome_dialog/src/animated_button.dart';
-import 'package:awesome_dialog/src/anims/native_animations.dart';
-import 'package:awesome_dialog/src/header.dart';
-import 'package:awesome_dialog/src/vertical_stack_header_dialog.dart';
+import 'package:awesome_dialog_plus/src/animated_button.dart';
+import 'package:awesome_dialog_plus/src/anims/native_animations.dart';
+import 'package:awesome_dialog_plus/src/header.dart';
+import 'package:awesome_dialog_plus/src/vertical_stack_header_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -58,9 +58,9 @@ class AwesomeDialog {
     this.reverseBtnOrder = false,
     this.transitionAnimationDuration = const Duration(milliseconds: 300),
   }) : assert(
-          autoDismiss || onDismissCallback != null,
-          'If autoDismiss is false, you must provide an onDismissCallback to pop the dialog',
-        );
+         autoDismiss || onDismissCallback != null,
+         'If autoDismiss is false, you must provide an onDismissCallback to pop the dialog',
+       );
 
   /// [@required]
   final BuildContext context;
@@ -228,39 +228,42 @@ class AwesomeDialog {
   /// Shows the dialog using the [showGeneralDialog] function
   ///
   /// Returns `null` if [autoDismiss] is true, else returns data passed to custom [Navigator.pop] function
-  Future<dynamic> show() => showGeneralDialog(
+  Future<dynamic> show() =>
+      showGeneralDialog(
         context: context,
         useRootNavigator: useRootNavigator,
         barrierDismissible: dismissOnTouchOutside,
-        pageBuilder: (
-          BuildContext buildContext,
-          Animation<double> animation,
-          Animation<double> secondaryAnimation,
-        ) {
-          if (autoHide != null) {
-            Future<dynamic>.delayed(autoHide!).then((dynamic _) {
-              _dismissType = DismissType.autoHide;
-              dismiss();
-            });
-          }
-          return _buildDialog;
-        },
+        pageBuilder:
+            (
+              BuildContext buildContext,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+            ) {
+              if (autoHide != null) {
+                Future<dynamic>.delayed(autoHide!).then((dynamic _) {
+                  _dismissType = DismissType.autoHide;
+                  dismiss();
+                });
+              }
+              return _buildDialog;
+            },
         transitionDuration: transitionAnimationDuration,
-        transitionBuilder: (
-          BuildContext context,
-          Animation<double> animation,
-          Animation<double> secondaryAnimation,
-          Widget child,
-        ) =>
-            _showAnimation(animation, secondaryAnimation, child),
+        transitionBuilder:
+            (
+              BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+              Widget child,
+            ) => _showAnimation(animation, secondaryAnimation, child),
         barrierColor: barrierColor ?? const Color(0x80000000),
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierLabel: MaterialLocalizations.of(
+          context,
+        ).modalBarrierDismissLabel,
       )..then<dynamic>(
-          (dynamic value) => _onDismissCallbackCalled
-              ? null
-              : onDismissCallback?.call(_dismissType),
-        );
+        (dynamic value) => _onDismissCallbackCalled
+            ? null
+            : onDismissCallback?.call(_dismissType),
+      );
 
   /// Return the header of the dialog
   Widget? get _buildHeader {
@@ -278,42 +281,41 @@ class AwesomeDialog {
 
   /// Returns the body of the dialog
   Widget get _buildDialog => WillPopScope(
-        onWillPop: _onWillPop,
-        child: _getDialogWidget(
-          child: VerticalStackDialog(
-            dialogBackgroundColor: dialogBackgroundColor,
-            borderSide: borderSide,
-            borderRadius: dialogBorderRadius,
-            header: _buildHeader,
-            title: title,
-            titleStyle: titleTextStyle,
-            desc: desc,
-            descStyle: descTextStyle,
-            descAlign: descAlign,
-            body: body,
-            isDense: isDense,
-            alignment: alignment,
-            keyboardAware: keyboardAware,
-            width: width,
-            padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
-            bodyHeaderDistance: bodyHeaderDistance,
-            btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
-            btnCancel: btnCancel ??
-                (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
-            showCloseIcon: showCloseIcon,
-            onClose: () {
-              _dismissType = DismissType.topIcon;
-              dismiss.call();
-            },
-            closeIcon: closeIcon,
-            reverseBtnOrder: reverseBtnOrder,
-          ),
-        ),
-      );
+    onWillPop: _onWillPop,
+    child: _getDialogWidget(
+      child: VerticalStackDialog(
+        dialogBackgroundColor: dialogBackgroundColor,
+        borderSide: borderSide,
+        borderRadius: dialogBorderRadius,
+        header: _buildHeader,
+        title: title,
+        titleStyle: titleTextStyle,
+        desc: desc,
+        descStyle: descTextStyle,
+        descAlign: descAlign,
+        body: body,
+        isDense: isDense,
+        alignment: alignment,
+        keyboardAware: keyboardAware,
+        width: width,
+        padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
+        bodyHeaderDistance: bodyHeaderDistance,
+        btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
+        btnCancel:
+            btnCancel ??
+            (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+        showCloseIcon: showCloseIcon,
+        onClose: () {
+          _dismissType = DismissType.topIcon;
+          dismiss.call();
+        },
+        closeIcon: closeIcon,
+        reverseBtnOrder: reverseBtnOrder,
+      ),
+    ),
+  );
 
-  Widget _getDialogWidget({
-    required Widget child,
-  }) {
+  Widget _getDialogWidget({required Widget child}) {
     return enableEnterKey
         ? RawKeyboardListener(
             focusNode: FocusNode(),
@@ -365,43 +367,39 @@ class AwesomeDialog {
           child,
         );
       case AnimType.scale:
-        return AnimationTransition.scale(
-          animation,
-          secondaryAnimation,
-          child,
-        );
+        return AnimationTransition.scale(animation, secondaryAnimation, child);
     }
   }
 
   /// Returns the default `Ok Button` widget
   Widget get _buildFancyButtonOk => AnimatedButton(
-        isFixedHeight: false,
-        pressEvent: () {
-          _dismissType = DismissType.btnOk;
-          dismiss();
-          btnOkOnPress?.call();
-        },
-        text: btnOkText ?? 'Ok',
-        color: btnOkColor ?? const Color(0xFF00CA71),
-        icon: btnOkIcon,
-        borderRadius: buttonsBorderRadius,
-        buttonTextStyle: buttonsTextStyle,
-      );
+    isFixedHeight: false,
+    pressEvent: () {
+      _dismissType = DismissType.btnOk;
+      dismiss();
+      btnOkOnPress?.call();
+    },
+    text: btnOkText ?? 'Ok',
+    color: btnOkColor ?? const Color(0xFF00CA71),
+    icon: btnOkIcon,
+    borderRadius: buttonsBorderRadius,
+    buttonTextStyle: buttonsTextStyle,
+  );
 
   /// Returns the default `Cancel Button` widget
   Widget get _buildFancyButtonCancel => AnimatedButton(
-        isFixedHeight: false,
-        pressEvent: () {
-          _dismissType = DismissType.btnCancel;
-          dismiss();
-          btnCancelOnPress?.call();
-        },
-        text: btnCancelText ?? 'Cancel',
-        color: btnCancelColor ?? Colors.red,
-        icon: btnCancelIcon,
-        borderRadius: buttonsBorderRadius,
-        buttonTextStyle: buttonsTextStyle,
-      );
+    isFixedHeight: false,
+    pressEvent: () {
+      _dismissType = DismissType.btnCancel;
+      dismiss();
+      btnCancelOnPress?.call();
+    },
+    text: btnCancelText ?? 'Cancel',
+    color: btnCancelColor ?? Colors.red,
+    icon: btnCancelIcon,
+    borderRadius: buttonsBorderRadius,
+    buttonTextStyle: buttonsTextStyle,
+  );
 
   /// Called to dismiss the dialog using the [Navigator.pop] method
   /// or calls the [onDismissCallback] function if [autoDismiss] is `false`
@@ -450,7 +448,7 @@ enum DialogType {
   noHeader,
 
   ///Dialog with question header
-  question
+  question,
 }
 
 ///Defines dismiss type of [AwesomeDialog]

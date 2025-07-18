@@ -1,4 +1,4 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:awesome_dialog_plus/awesome_dialog_plus.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
