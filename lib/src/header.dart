@@ -22,33 +22,27 @@ class AwesomeDialogHeader extends StatelessWidget {
     switch (dialogType) {
       case DialogType.info:
         return RiveAssetAnimation(
-          assetPath: 'packages/awesome_dialog/assets/rive/info.riv',
+          assetPath: 'packages/awesome_dialog_plus/assets/info.gif',
           animName: loop ? 'appear_loop' : 'appear',
         );
-      case DialogType.infoReverse:
-        return RiveAssetAnimation(
-          assetPath: 'packages/awesome_dialog/assets/rive/info_reverse.riv',
-          animName: loop ? 'appear_loop' : 'appear',
-        );
-
       case DialogType.question:
         return RiveAssetAnimation(
-          assetPath: 'packages/awesome_dialog/assets/rive/question.riv',
+          assetPath: 'packages/awesome_dialog_plus/assets/question.gif',
           animName: loop ? 'appear_loop' : 'appear',
         );
       case DialogType.warning:
         return RiveAssetAnimation(
-          assetPath: 'packages/awesome_dialog/assets/rive/warning.riv',
+          assetPath: 'packages/awesome_dialog_plus/assets/warning.gif',
           animName: loop ? 'appear_loop' : 'appear',
         );
       case DialogType.error:
         return RiveAssetAnimation(
-          assetPath: 'packages/awesome_dialog/assets/rive/error.riv',
+          assetPath: 'packages/awesome_dialog_plus/assets/error.gif',
           animName: loop ? 'appear_loop' : 'appear',
         );
       case DialogType.success:
         return RiveAssetAnimation(
-          assetPath: 'packages/awesome_dialog/assets/rive/success.riv',
+          assetPath: 'packages/awesome_dialog_plus/assets/success.gif',
           animName: loop ? 'appear_loop' : 'appear',
         );
       case DialogType.noHeader:

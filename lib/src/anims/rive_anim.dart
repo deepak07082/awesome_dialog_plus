@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
 
 ///RiveRuntimeRender
 class RiveAssetAnimation extends StatefulWidget {
@@ -20,21 +19,15 @@ class RiveAssetAnimation extends StatefulWidget {
 }
 
 class _RiveAnimationState extends State<RiveAssetAnimation> {
-  // Controller for playback
-  late RiveAnimationController<dynamic> _controller;
-
   @override
   void initState() {
     super.initState();
-
-    _controller = SimpleAnimation(widget.animName);
   }
 
   @override
   Widget build(BuildContext context) {
-    return RiveAnimation.asset(
+    return Image.asset(
       widget.assetPath,
-      controllers: [_controller],
     );
   }
 }

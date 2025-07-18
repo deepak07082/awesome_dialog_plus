@@ -92,7 +92,6 @@ class _AnimatedButtonState extends State<AnimatedButton>
 
   Future<void> _onTap() async {
     await _animationController.forward();
-    //Delayed added in purpose to keep same animation behavior as previous version when dialog was closed while animation was still playing
     await Future<void>.delayed(
       const Duration(milliseconds: _forwardDurationNumber ~/ 2),
     );

@@ -437,9 +437,6 @@ enum DialogType {
   ///Dialog with information type header
   info,
 
-  ///Dialog with information type header rotated 180 degree
-  infoReverse,
-
   ///Dialog with warning amber type header
   warning,
 

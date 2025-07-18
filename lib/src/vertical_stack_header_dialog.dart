@@ -153,8 +153,8 @@ class VerticalStackDialog extends StatelessWidget {
                                 if (btnOk != null)
                                   Expanded(
                                     child: btnOk!,
-                                  )
-                              ]
+                                  ),
+                              ],
                             ],
                           ),
                         ),

@@ -95,26 +95,6 @@ class _HomePageState extends State<HomePage> {
                   height: 16,
                 ),
                 AnimatedButton(
-                  text: 'Info Reverse Dialog Without buttons',
-                  pressEvent: () {
-                    AwesomeDialog(
-                      context: context,
-                      dialogType: DialogType.infoReverse,
-                      headerAnimationLoop: true,
-                      animType: AnimType.bottomSlide,
-                      title: 'INFO Reversed',
-                      reverseBtnOrder: true,
-                      btnOkOnPress: () {},
-                      btnCancelOnPress: () {},
-                      desc:
-                          'Lorem ipsum dolor sit amet consectetur adipiscing elit eget ornare tempus, vestibulum sagittis rhoncus felis hendrerit lectus ultricies duis vel, id morbi cum ultrices tellus metus dis ut donec. Ut sagittis viverra venenatis eget euismod faucibus odio ligula phasellus,',
-                    ).show();
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                AnimatedButton(
                   text: 'Warning Dialog',
                   color: Colors.orange,
                   pressEvent: () {
@@ -249,26 +229,6 @@ class _HomePageState extends State<HomePage> {
                   height: 16,
                 ),
                 AnimatedButton(
-                  text: 'Auto Hide Dialog',
-                  color: Colors.purple,
-                  pressEvent: () {
-                    AwesomeDialog(
-                      context: context,
-                      dialogType: DialogType.infoReverse,
-                      animType: AnimType.scale,
-                      title: 'Auto Hide Dialog',
-                      desc: 'AutoHide after 2 seconds',
-                      autoHide: const Duration(seconds: 2),
-                      onDismissCallback: (type) {
-                        debugPrint('Dialog Dissmiss from callback $type');
-                      },
-                    ).show();
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                AnimatedButton(
                   text: 'Testing Dialog',
                   color: Colors.orange,
                   pressEvent: () {
@@ -387,7 +347,7 @@ class _HomePageState extends State<HomePage> {
                       onDismissCallback: (type) {
                         Navigator.of(context).pop(type);
                       },
-                      barrierColor: Colors.purple[900]?.withOpacity(0.54),
+                      barrierColor: Colors.purple[900]?.withValues(alpha: 0.54),
                     ).show();
 
                     ScaffoldMessenger.of(context).showSnackBar(

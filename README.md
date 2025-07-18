@@ -7,7 +7,9 @@ A new Flutter package project for simple and awesome dialogs
 To use this package, add awesome_dialog as a dependency in your pubspec.yaml file.
 And add this import to your file.
 
+```dart
 import 'package:awesome_dialog/awesome_dialog.dart';
+```
 
 ## Demo
 Check out <https://cv.toranzo.dev/awesome-dialog> for more fun.
