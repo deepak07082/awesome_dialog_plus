@@ -1,3 +1,8 @@
+## [3.2.2] - 18/07/2025
+
+* weight packages removed(rive and flare)
+* Gif added for replacement.
+
 ## [3.2.1] - 30/04/2024
 
 * Upgrade dependencies.
