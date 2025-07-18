@@ -1,3 +1,7 @@
+## [3.2.3] - 18/07/2025
+
+* minor bug fix
+
 ## [3.2.2] - 18/07/2025
 
 * weight packages removed(rive and flare)
